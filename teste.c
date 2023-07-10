@@ -1,3 +1,5 @@
+int concatena_vetor(int* vetor1, int* vetor2, int* vetor_resultante, int tam_vet_1, int tam_vet_2);
+
 int concatena_vetor(int* vetor1, int* vetor2, int* vetor_resultante, int tam_vet_1, int tam_vet_2){
     //if (vetor_resultante == NULL) return -1;
 
