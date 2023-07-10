@@ -9,6 +9,10 @@ short mostra_vetor(int*, int);
 void troca(int*, int*);
 void bubbleSort(int*, int);
 
+//concatena vetor
+
+int concatenar_vetor(int* vetor1, int* vetor2, int vetor_resultante, int tam_vet_1, int tam_vet_2);
+
 int main(void){
     srand(time(NULL)); //Semente para a rand, gerar numeros aleatorios com base no tempo;
 
@@ -40,7 +44,7 @@ short atribui_vetor(int vetor[], int tamanho){
     if (vetor == NULL || tamanho == 0) return -1;
 
     for (p = &vetor[0]; p < &vetor[tamanho]; p++){
-        *p = rand() % (limite_superior % 100); // retornar um valor pseudoaleatorio menor que 1000
+        *p = rand() % (limite_superior % 101); // retornar um valor pseudoaleatorio menor que 1000
         i++;
     }
 
@@ -79,4 +83,40 @@ void bubbleSort(int vetor[], int tam_vetor){
         if (trocou == false)
             break;
     }
+}
+
+int particao(int vetor[], int esq, int dir) {
+    int pivo = vetor[dir];
+    int i = (esq - 1);
+
+    for (int j = esq; j <= dir - 1; j++) {
+        if (vetor[j] < pivo) {
+            i++;
+            troca(&vetor[i], &vetor[j]);
+        }
+    }
+    troca(&vetor[i + 1], &vetor[dir]);
+    return (i + 1);
+}
+
+void quicksort(int vetor[], int esq, int dir) {
+    if (esq < dir) {
+        int pivoIndex = particao(vetor, esq, dir);
+        quicksort(vetor, esq, pivoIndex - 1);
+        quicksort(vetor, pivoIndex + 1, dir);
+    }
+}
+
+int concatenar_vetor(int* vetor1, int* vetor2, int vetor_resultante, int tam_vet_1, int tam_vet_2){
+    if (vetor_resultante == NULL) return -1;
+
+    for (int i = 0; i < tam_vet_1; i++){
+        vetor_resultante = vetor1[i];
+    }
+    
+    for (int j = 0; j < tam_vet_2; j++){
+        vetor_resultante = vetor2[tam_vet_1 + j];
+    }
+
+    return 1;
 }
